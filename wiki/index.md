@@ -7,38 +7,90 @@ updated: 2026-04-14
 
 Content catalog for the WireCell knowledge base. Updated by the LLM on every ingest, filed query, or lint pass.
 
+---
+
 ## Sources
 
+Raw source ingest records:
+
 - [[source-sigproc-examination]] — Systematic code examination of `sigproc` (~16,600 lines): bugs, efficiency, algorithm docs. 17/40 bugs fixed, 11/25 efficiency issues fixed.
+- [[source-clus-examination]] — All 9 documentation files from `clus/docs/`: full clus pipeline from clustering to neutrino tagging.
 - [[source-pdvd-wct-config]] — ProtoDUNE-VD Jsonnet configuration files controlling the actual WCT processing pipeline.
 
+---
+
 ## Algorithms
+
+Algorithms are organized by toolkit module. Each module has sub-sections matching its internal structure.
+
+### sigproc
+
+Signal processing module: ADC waveform → deconvolved charge with ROI.
+
+#### Noise Filtering
+
+- [[Omnibus Noise Filter]] — Three-pass noise filtering orchestrator (per-channel, grouped coherent, status)
+- [[OmniChannelNoiseDB]] — JSON-configurable per-channel noise parameter and filter spectrum database
+
+#### Signal Processing
 
 - [[WireCellSigProc Pipeline Overview]] — Full ADC→charge pipeline: noise filtering + signal processing architecture
 - [[OmnibusSigProc]] — Master signal processing orchestrator (2D deconvolution + ROI pipeline)
 - [[ROI Formation]] — Two-tier (tight + loose) region-of-interest identification
 - [[ROI Refinement]] — Multi-stage iterative ROI cleanup (BFS, multi-plane, BreakROI, ShrinkROI, ExtendROI)
 - [[L1SP Filter]] — LASSO sparse deconvolution for shorted wire regions
-- [[Detector-Specific Signal Processing]] — Per-detector noise filtering (MicroBooNE, ProtoDUNE-SP/HD/VD, DuneCrp, ICARUS)
+- [[Detector-Specific Signal Processing]] — Per-detector noise filtering comparison (MicroBooNE, ProtoDUNE-SP/HD/VD, DuneCrp, ICARUS)
 
-## Components
+---
 
-- [[Omnibus Noise Filter]] — Three-pass noise filtering orchestrator (per-channel, grouped coherent, status)
-- [[OmniChannelNoiseDB]] — JSON-configurable per-channel noise parameter and filter spectrum database
+### clus
 
-## ProtoDUNE-VD Configuration
+Pattern recognition module: 3D blob cloud → particle trajectories + neutrino vertex.
 
-- [[ProtoDUNE-VD WireCell Configuration Overview]] — Full pipeline entry points, frame tag flow, design notes
-- [[PDVD Detector Parameters]] — Geometry, ADC, electronics (bottom vs top), field response, noise spectra, channel layout
-- [[PDVD Noise Filtering Configuration]] — NF filter assembly: PDVDOneChannelNoise, CoherentNoiseSub, ShieldCouplingSub
-- [[PDVD Signal Processing Configuration]] — OmnibusSigProc per-anode config: thresholds, timing, ADC conversion, frame tags
+#### Clustering
+
+- [[WireCell Clus Pipeline Overview]] — IEnsembleVisitor pattern, 6-stage pipeline (clustering stages 1–3, PR stages 4–6), data hierarchy
+- [[Clus Data Structures]] — Facade layer, PC tree, PR::Graph/Vertex/Segment/Shower/Fit types
+
+#### Pattern Recognition
+
+- [[Steiner Graph]] — Retiling + k-d neighbor search + Kruskal MST skeleton; degree semantics
+- [[Pattern Recognition PR Loop]] — find_proto_vertex() 9-step loop, vertex scoring, SCN DL variant
+- [[Track Shower Separation]] — Topology (RMS spread) + trajectory (KS-test) classification, shower grouping, kinematics
+- [[Neutrino Vertex Determination]] — Per-cluster scoring, global multi-cluster selection, SCN DL override (2 cm cut)
+- [[Track Fitting and Calorimetry]] — Wire→space projection, dQ/dx measurement, Box recombination model, ParticleDataSet
+- [[Particle Identification]] — is_shower predicate, determine_direction dispatch, BFS PDG propagation
+- [[Neutrino Taggers]] — NuMu, NuE, Pi0, Cosmic, SSM, SinglePhoton criteria and outputs
+
+---
+
+### imaging *(pending)*
+
+3D imaging module: charge-solved blob generation from wire-plane hits. Expected after next ingest.
+
+### charge-light matching *(pending)*
+
+Flash-matching module: optical detector constraints on drift coordinate. Expected after next ingest.
+
+---
+
+## Experiments & Configuration
+
+Configuration files define how the algorithms above are wired and tuned for a specific detector. Detector-specific geometry and electronics parameters live here alongside the run-chain configs.
+
+### ProtoDUNE-VD (PDVD)
+
+- [[PDVD Detector Parameters]] — Geometry, ADC (14-bit), bottom/top electronics, field response, noise spectra, channel layout
+- [[ProtoDUNE-VD WireCell Configuration Overview]] — Full pipeline entry points (nf, nf-sp, nf-sp-img), frame tag flow
+- [[PDVD Noise Filtering Configuration]] — NF filter assembly: PDVDOneChannelNoise, CoherentNoiseSub, ShieldCouplingSub (top anodes only)
+- [[PDVD Signal Processing Configuration]] — OmnibusSigProc per-anode config: thresholds, ctoffset=4µs tied to FR file, ADC conversion
 - [[PDVD SP Filters]] — SP filter kernel parameters (ROI LF filters, Gaussian, Wiener, wire filters)
-- [[PDVD DNN ROI]] — DNN-based ROI finding (DNNROIFinding, TorchService/TritonService, W shunt)
-- [[PDVD Imaging Configuration]] — 3D imaging: pre-proc, slicing, tiling, charge solving
+- [[PDVD DNN ROI]] — DNN-based ROI finding: DNNROIFinding for U+V, W shunt, TorchService/TritonService
+- [[PDVD Imaging Configuration]] — 3D imaging: pre-proc, slicing (tick_span=4), tiling (GridTiling), charge solving
 
-## Experiments
+### ProtoDUNE-HD (pdhd) *(pending)*
 
-*(MicroBooNE, ProtoDUNE-SP, ProtoDUNE-HD standalone pages pending)*
+---
 
 ## Synthesis / Meta
 

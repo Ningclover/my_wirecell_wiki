@@ -39,3 +39,31 @@ Pages created:
 - detector-specific-sigproc.md
 - sigproc-bug-list.md
 - sigproc-efficiency-issues.md
+
+## [2026-04-14] ingest | WireCell clus pattern recognition module
+Ingested `raw/wire-cell-toolkit/clus/docs/` — all 9 documentation files covering the full pattern recognition pipeline.
+
+Pages created:
+- source-clus-examination.md
+- WireCell Clus Pipeline Overview.md
+- Clus Data Structures.md
+- Steiner Graph.md
+- Pattern Recognition PR Loop.md
+- Track Shower Separation.md
+- Neutrino Vertex Determination.md
+- Track Fitting and Calorimetry.md
+- Particle Identification.md
+- Neutrino Taggers.md
+
+## [2026-04-14] reorganize | Module-based index structure
+Restructured index.md and CLAUDE.md to reflect module hierarchy.
+
+- Algorithms section split by module (sigproc, clus) with sub-sections per module
+- sigproc: "Noise Filtering" + "Signal Processing" sub-sections
+- clus: "Clustering" + "Pattern Recognition" sub-sections
+- Placeholder entries for imaging and charge-light matching modules
+- New "Experiments & Configuration" section replaces "ProtoDUNE-VD Configuration"
+  (groups detector params + pipeline configs per experiment; PDVD now, pdhd pending)
+- Renamed "WireCell Pattern Recognition Overview.md" → "WireCell Clus Pipeline Overview.md"
+  (page covers all 6 clus stages, not just pattern recognition)
+- Updated all 9 pages that linked to the old name

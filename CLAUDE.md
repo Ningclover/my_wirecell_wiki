@@ -31,6 +31,23 @@ CLAUDE.md     — this file (schema and operating instructions)
   ---
   ```
 
+### Wiki top-level structure
+
+`index.md` is organized into four sections. Place new pages in the correct section:
+
+1. **Sources** — `source-*.md` ingest records, one per raw source directory.
+2. **Algorithms** — algorithm and component pages, grouped by toolkit module:
+   - `sigproc`: sub-sections "Noise Filtering" and "Signal Processing"
+   - `clus`: sub-sections "Clustering" and "Pattern Recognition"
+   - `imaging`: (pending) sub-sections TBD
+   - `charge-light matching`: (pending) sub-sections TBD
+   - Add a new module section when a new raw module is ingested.
+3. **Experiments & Configuration** — per-experiment detector parameters + pipeline wiring configs:
+   - `PDVD`: ProtoDUNE-VD pages
+   - `pdhd`: ProtoDUNE-HD pages (pending)
+   - Add a new sub-section when a new experiment config is ingested.
+4. **Synthesis / Meta** — cross-source analysis, bug lists, efficiency summaries.
+
 ### Categories and tags
 
 - **algorithm** — a specific reconstruction or signal processing algorithm (e.g. Wire-Cell Imaging, ROI finding, noise filtering, tomographic reconstruction)
