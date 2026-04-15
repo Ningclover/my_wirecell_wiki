@@ -67,3 +67,8 @@ Restructured index.md and CLAUDE.md to reflect module hierarchy.
 - Renamed "WireCell Pattern Recognition Overview.md" → "WireCell Clus Pipeline Overview.md"
   (page covers all 6 clus stages, not just pattern recognition)
 - Updated all 9 pages that linked to the old name
+
+## [2026-04-14] ingest | Clustering Algorithms Internals
+- Created [[Clustering Algorithms Internals]] from live debugging session
+- Covers: clustering_regular/Find_Closest_Points/get_strategic_points/get_hull internals, cluster swap logic, ClusterCache/excluded_points, crash investigation log (heap corruption, 2026-04-14)
+- Updated index.md Clustering sub-section

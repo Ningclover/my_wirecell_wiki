@@ -51,6 +51,7 @@ Pattern recognition module: 3D blob cloud → particle trajectories + neutrino v
 
 - [[WireCell Clus Pipeline Overview]] — IEnsembleVisitor pattern, 6-stage pipeline (clustering stages 1–3, PR stages 4–6), data hierarchy
 - [[Clus Data Structures]] — Facade layer, PC tree, PR::Graph/Vertex/Segment/Shower/Fit types
+- [[Clustering Algorithms Internals]] — `clustering_regular`, `Find_Closest_Points`, `get_strategic_points`, `get_hull`, `ClusterCache`; crash investigation log
 
 #### Pattern Recognition
 
