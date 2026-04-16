@@ -1,6 +1,6 @@
 ---
 tags: [meta]
-updated: 2026-04-14
+updated: 2026-04-16
 ---
 
 # WireCell Wiki Index
@@ -11,11 +11,12 @@ Content catalog for the WireCell knowledge base. Updated by the LLM on every ing
 
 ## Sources
 
-Raw source ingest records:
+Raw source ingest records (`type: file`) and session records (`type: conversation`):
 
 - [[source-sigproc-examination]] — Systematic code examination of `sigproc` (~16,600 lines): bugs, efficiency, algorithm docs. 17/40 bugs fixed, 11/25 efficiency issues fixed.
 - [[source-clus-examination]] — All 9 documentation files from `clus/docs/`: full clus pipeline from clustering to neutrino tagging.
 - [[source-pdvd-wct-config]] — ProtoDUNE-VD Jsonnet configuration files controlling the actual WCT processing pipeline.
+- [[source-session-2026-04-14-clustering-internals]] — Code investigation session: heap corruption debugging in `clustering_extend.cxx`, `Find_Closest_Points` and `get_hull` internals.
 
 ---
 

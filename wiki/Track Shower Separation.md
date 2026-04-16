@@ -1,3 +1,9 @@
+---
+tags: [algorithm]
+sources: 1
+updated: 2026-04-16
+---
+
 # Track Shower Separation
 
 `separate_track_shower()` classifies each `PR::Segment` as either a **track** or a **shower** using two independent tests. A segment is a shower if either test fires.
@@ -62,3 +68,7 @@ After shower grouping, energy is summed:
 - [[Track Fitting and Calorimetry]]
 - [[Particle Identification]]
 - [[Neutrino Taggers]]
+
+## Sources
+
+- [[source-clus-examination]]

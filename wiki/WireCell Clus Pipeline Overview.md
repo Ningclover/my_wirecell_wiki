@@ -1,3 +1,9 @@
+---
+tags: [algorithm, component]
+sources: 1
+updated: 2026-04-16
+---
+
 # WireCell Clus Pipeline Overview
 
 The `clus` module converts 3D blob clouds produced by imaging into reconstructed particle trajectories and neutrino interaction vertices. It is organized into two functional sub-sections: **Clustering** (stages 1–3) and **Pattern Recognition** (stages 4–6).
@@ -73,3 +79,8 @@ Within `TaggerCheckNeutrino`, the following run in order:
 - [[Neutrino Vertex Determination]]
 - [[Particle Identification]]
 - [[Neutrino Taggers]]
+- [[PDVD Imaging Configuration]] — upstream imaging step that produces the blob input
+
+## Sources
+
+- [[source-clus-examination]]

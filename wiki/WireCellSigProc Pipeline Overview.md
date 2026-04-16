@@ -73,12 +73,12 @@ Configured via Jsonnet. Key files:
 
 | Detector | Unique noise features |
 |----------|-----------------------|
-| [[MicroBooNE]] | Chirp, ADC bit shift, partial RC, coherent noise |
-| [[ProtoDUNE-SP]] | Sticky codes, ledge artifacts, 50 kHz harmonic, FEMB clock |
-| [[ProtoDUNE-HD]] | FEMB negative pulses, wide adaptive baseline (512 ticks) |
-| [[ProtoDUNE-VD]] | Shield coupling subtraction |
-| [[DUNE CRP]] | RC undershoot, partial RC |
-| [[ICARUS]] | RC undershoot only (simplest) |
+| MicroBooNE | Chirp, ADC bit shift, partial RC, coherent noise |
+| ProtoDUNE-SP | Sticky codes, ledge artifacts, 50 kHz harmonic, FEMB clock |
+| ProtoDUNE-HD | FEMB negative pulses, wide adaptive baseline (512 ticks) |
+| ProtoDUNE-VD | Shield coupling subtraction (see [[ProtoDUNE-VD WireCell Configuration Overview]]) |
+| DUNE CRP | RC undershoot, partial RC |
+| ICARUS | RC undershoot only (simplest) |
 
 ## Sources
 

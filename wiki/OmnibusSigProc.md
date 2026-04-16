@@ -52,7 +52,9 @@ Master orchestrator for WireCell signal processing. Processes each wire plane (U
 
 ## See also
 
-[[WireCellSigProc Pipeline Overview]], [[ROI Formation]], [[ROI Refinement]]
+- [[WireCellSigProc Pipeline Overview]]
+- [[ROI Formation]]
+- [[ROI Refinement]]
 
 ## Sources
 

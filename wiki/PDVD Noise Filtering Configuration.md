@@ -27,7 +27,7 @@ Standard per-channel cleanup — RC correction, spectral masking, baseline subtr
 
 ## Grouped filter: PDVDCoherentNoiseSub
 
-Coherent noise subtraction using median across electronics groups. Applied to **all anodes** using `chndb.groups` from [[PDVD chndb-base]].
+Coherent noise subtraction using median across electronics groups. Applied to **all anodes** using `chndb.groups` from `chndb-base.jsonnet`.
 
 - `rms_threshold: 0.0` — no RMS gating; all channels contribute to the group median
 

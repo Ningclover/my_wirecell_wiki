@@ -1,3 +1,9 @@
+---
+tags: [algorithm]
+sources: 1
+updated: 2026-04-16
+---
+
 # Pattern Recognition PR Loop
 
 The PR loop transforms the [[Steiner Graph]] skeleton into a fully labeled trajectory graph with identified vertices, track/shower segments, and a candidate neutrino vertex.
@@ -66,3 +72,7 @@ When DL vertex finding is enabled, a Sparse Convolutional Network (SCN) classifi
 - [[Clus Data Structures]]
 - [[Track Shower Separation]]
 - [[Neutrino Vertex Determination]]
+
+## Sources
+
+- [[source-clus-examination]]

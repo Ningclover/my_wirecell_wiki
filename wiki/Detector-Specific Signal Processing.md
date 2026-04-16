@@ -109,7 +109,9 @@ Foundational implementation; most other detectors derive from it.
 
 ## See also
 
-[[WireCellSigProc Pipeline Overview]], [[Omnibus Noise Filter]], [[MicroBooNE]], [[ProtoDUNE-SP]], [[ProtoDUNE-HD]], [[ProtoDUNE-VD]]
+- [[WireCellSigProc Pipeline Overview]]
+- [[Omnibus Noise Filter]]
+- [[ProtoDUNE-VD WireCell Configuration Overview]] — PDVD-specific pipeline wiring
 
 ## Sources
 

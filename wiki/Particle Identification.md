@@ -1,3 +1,9 @@
+---
+tags: [algorithm]
+sources: 1
+updated: 2026-04-16
+---
+
 # Particle Identification
 
 Particle identification (PID) in the clus module assigns PDG codes to `PR::Segment` objects and propagates directions from the neutrino vertex outward.
@@ -66,3 +72,7 @@ These maps are used by [[Neutrino Taggers]] (especially NuE and Pi0) to count sh
 - [[Neutrino Vertex Determination]]
 - [[Track Fitting and Calorimetry]]
 - [[Neutrino Taggers]]
+
+## Sources
+
+- [[source-clus-examination]]

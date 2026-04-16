@@ -1,3 +1,9 @@
+---
+tags: [algorithm, component]
+sources: 1
+updated: 2026-04-16
+---
+
 # Track Fitting and Calorimetry
 
 `TrackFitting` is a utility class (not a WireCell component — it has no `configure()` or `execute()` interface). It is instantiated by algorithms inside the clus pipeline to perform local track fitting and calorimetric energy measurement.
@@ -93,3 +99,7 @@ A detector-agnostic lookup table of dE/dx vs kinetic energy (and range-energy) f
 - [[Track Shower Separation]]
 - [[Particle Identification]]
 - [[PDVD Signal Processing Configuration]]
+
+## Sources
+
+- [[source-clus-examination]]

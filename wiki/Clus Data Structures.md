@@ -1,3 +1,9 @@
+---
+tags: [component, concept]
+sources: 1
+updated: 2026-04-16
+---
+
 # Clus Data Structures
 
 The `clus` module layers three abstraction levels on top of WireCell's core blob types: the **Facade layer**, the **PC tree**, and the **PR graph types**.
@@ -65,3 +71,7 @@ Stores fitted parameters at a point: position, direction, dQ/dx, dE/dx after rec
 - [[Steiner Graph]]
 - [[Pattern Recognition PR Loop]]
 - [[Track Shower Separation]]
+
+## Sources
+
+- [[source-clus-examination]]

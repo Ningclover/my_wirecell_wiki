@@ -1,3 +1,9 @@
+---
+tags: [algorithm]
+sources: 1
+updated: 2026-04-16
+---
+
 # Neutrino Taggers
 
 Six tagger algorithms run in Stage 6 (`TaggerCheckNeutrino`) after [[Particle Identification]]. Each sets a flag on the event's neutrino vertex.
@@ -84,3 +90,7 @@ Taggers are not mutually exclusive by default. An event can carry multiple flags
 - [[Track Shower Separation]]
 - [[Neutrino Vertex Determination]]
 - [[Particle Identification]]
+
+## Sources
+
+- [[source-clus-examination]]

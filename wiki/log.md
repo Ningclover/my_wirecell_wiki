@@ -72,3 +72,16 @@ Restructured index.md and CLAUDE.md to reflect module hierarchy.
 - Created [[Clustering Algorithms Internals]] from live debugging session
 - Covers: clustering_regular/Find_Closest_Points/get_strategic_points/get_hull internals, cluster swap logic, ClusterCache/excluded_points, crash investigation log (heap corruption, 2026-04-14)
 - Updated index.md Clustering sub-section
+
+## [2026-04-16] relink | Cross-server re-link pass + session record convention
+- Added YAML frontmatter to all 9 clus pages (was missing)
+- Added `## Sources` → `[[source-clus-examination]]` to all 9 clus pages
+- Added `type: file` to source-sigproc-examination, source-pdvd-wct-config, source-clus-examination
+- Created [[source-session-2026-04-14-clustering-internals]] — first session record, retroactively documents the 2026-04-14 clustering debugging session
+- Updated [[Clustering Algorithms Internals]] Sources to reference session record
+- Added [[PDVD Imaging Configuration]] → [[WireCell Clus Pipeline Overview]] cross-link (imaging feeds clus)
+- Added [[WireCell Clus Pipeline Overview]] → [[PDVD Imaging Configuration]] in See also
+- Fixed broken wikilinks: removed [[SignalROI]], [[PeakFinding]], [[PDVD chndb-base]] (no pages exist); replaced [[MicroBooNE]]/[[ProtoDUNE-SP]]/[[ProtoDUNE-HD]]/[[ProtoDUNE-VD]] in sigproc pages with plain text or redirect to [[ProtoDUNE-VD WireCell Configuration Overview]]
+- Normalized See also sections to bullet-list format on OmnibusSigProc, ROI Formation, ROI Refinement, PDVD Imaging, Detector-Specific Signal Processing
+- Updated CLAUDE.md: added session record format, Re-link operation, updated Sources index description
+- Updated add_to_wiki/SKILL.md: added Step 7 (create session record) and Step 8 (append log)

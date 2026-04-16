@@ -91,7 +91,9 @@ BlobClustering → ChargeSolving(uniform) → LocalGeomClustering → ChargeSolv
 
 ## See also
 
-[[ProtoDUNE-VD WireCell Configuration Overview]], [[PDVD Signal Processing Configuration]]
+- [[ProtoDUNE-VD WireCell Configuration Overview]]
+- [[PDVD Signal Processing Configuration]]
+- [[WireCell Clus Pipeline Overview]] — downstream consumer of imaging blobs
 
 ## Sources
 

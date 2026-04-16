@@ -60,7 +60,8 @@ Extend each ROI to cover the time range of overlapping neighbor ROIs. Ensures co
 
 ## See also
 
-[[OmnibusSigProc]], [[ROI Formation]], [[PeakFinding]]
+- [[OmnibusSigProc]]
+- [[ROI Formation]]
 
 ## Sources
 

@@ -1,3 +1,9 @@
+---
+tags: [algorithm]
+sources: 1
+updated: 2026-04-16
+---
+
 # Neutrino Vertex Determination
 
 Two levels of vertex selection: **per-cluster** (within a single cluster's PR graph) and **global** (across all clusters in the event).
@@ -72,3 +78,7 @@ For events with a single long track (candidate νμ CC):
 - [[Track Fitting and Calorimetry]]
 - [[Particle Identification]]
 - [[Neutrino Taggers]]
+
+## Sources
+
+- [[source-clus-examination]]

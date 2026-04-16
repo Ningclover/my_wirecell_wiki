@@ -53,7 +53,8 @@ Two-pass robust sigma-clipping:
 
 ## See also
 
-[[OmnibusSigProc]], [[ROI Refinement]], [[SignalROI]]
+- [[OmnibusSigProc]]
+- [[ROI Refinement]]
 
 ## Sources
 

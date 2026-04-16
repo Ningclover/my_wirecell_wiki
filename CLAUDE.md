@@ -31,11 +31,42 @@ CLAUDE.md     — this file (schema and operating instructions)
   ---
   ```
 
+### Source page types
+
+Two kinds of source pages exist, both using lowercase-hyphen filenames:
+
+**File-based source** (`source-<slug>.md`) — created when ingesting a raw file or directory. Standard format: frontmatter with `type: file`, summary of what was read, pages created.
+
+**Session record** (`source-session-YYYY-MM-DD-<slug>.md`) — created when knowledge comes from a debugging or investigation conversation rather than a raw file. This is the citable anchor for conversation-derived knowledge. Format:
+
+```markdown
+---
+tags: [source]
+type: conversation
+date: YYYY-MM-DD
+context: <what was being investigated>
+files_touched: [src/foo/Bar.cxx, src/foo/Baz.cxx]
+updated: YYYY-MM-DD
+---
+
+# source-session-YYYY-MM-DD-<slug>
+
+Brief description of the session.
+
+## Confirmed findings
+- <finding> — see [[Page Title]]
+
+## Context
+<What problem was being debugged, what experiment/module.>
+```
+
+Session records sync via GitHub alongside wiki pages and serve as `Sources:` citations exactly like file-based source pages. Add `type: file` to existing file-based source pages for consistency.
+
 ### Wiki top-level structure
 
 `index.md` is organized into four sections. Place new pages in the correct section:
 
-1. **Sources** — `source-*.md` ingest records, one per raw source directory.
+1. **Sources** — `source-*.md` ingest records (one per raw source directory) and `source-session-*.md` session records (one per debugging/investigation conversation).
 2. **Algorithms** — algorithm and component pages, grouped by toolkit module:
    - `sigproc`: sub-sections "Noise Filtering" and "Signal Processing"
    - `clus`: sub-sections "Clustering" and "Pattern Recognition"
@@ -103,6 +134,15 @@ When the user asks a question:
 2. Read those pages and synthesize an answer with citations (`[[Page Title]]`).
 3. If the answer is valuable, offer to file it as `wiki/synthesis-<slug>.md`.
 4. If filed, update `wiki/index.md` and append to `wiki/log.md`.
+
+### Re-link
+When the user asks for a re-link pass (e.g., after a `git pull` that brought in pages from another server):
+1. Read `wiki/index.md` to collect all known page titles.
+2. For each wiki page, scan its body for unlinked mentions of known page titles and add `[[wikilinks]]`.
+3. Scan `See also` sections for missing obvious cross-references and add them.
+4. Fix any broken wikilinks pointing to non-existent pages (de-link or redirect to the correct page).
+5. Ensure every algorithm/component page has a `## Sources` section.
+6. Append `## [YYYY-MM-DD] relink` to `wiki/log.md`.
 
 ### Lint
 When the user asks for a wiki health check:

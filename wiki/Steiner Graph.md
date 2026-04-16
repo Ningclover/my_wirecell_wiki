@@ -1,3 +1,9 @@
+---
+tags: [algorithm]
+sources: 1
+updated: 2026-04-16
+---
+
 # Steiner Graph
 
 The Steiner graph is a minimal spanning skeleton built from a cluster's blobs. It is the primary input for the [[Pattern Recognition PR Loop]] and vertex finding.
@@ -43,3 +49,7 @@ The MST minimizes total wire length while connecting all points — it produces 
 - [[WireCell Clus Pipeline Overview]]
 - [[Clus Data Structures]]
 - [[Pattern Recognition PR Loop]]
+
+## Sources
+
+- [[source-clus-examination]]

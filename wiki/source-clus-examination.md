@@ -1,7 +1,10 @@
 ---
+tags: [source]
+type: file
 source: raw/wire-cell-toolkit/clus/
 ingested: 2026-04-14
 status: complete
+updated: 2026-04-14
 ---
 
 # Source: clus examination

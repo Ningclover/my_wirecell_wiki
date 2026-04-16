@@ -1,6 +1,7 @@
 ---
 tags: [algorithm]
-updated: 2026-04-14
+sources: 2
+updated: 2026-04-16
 ---
 
 # Clustering Algorithms Internals
@@ -124,3 +125,8 @@ Each cluster owns a `ClusterCache` (accessed via `cache()`). The cache stores:
 - [[WireCell Clus Pipeline Overview]]
 - [[Clus Data Structures]]
 - [[Steiner Graph]]
+
+## Sources
+
+- [[source-clus-examination]] — algorithm structure from `clus` docs
+- [[source-session-2026-04-14-clustering-internals]] — code investigation, heap corruption debugging
