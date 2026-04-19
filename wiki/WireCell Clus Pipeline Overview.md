@@ -64,6 +64,38 @@ Within `TaggerCheckNeutrino`, the following run in order:
 4. [[Particle Identification]] — BFS direction propagation, PDG assignment
 5. [[Neutrino Taggers]] — NuMu, NuE, Pi0, Cosmic, SSM, SinglePhoton
 
+## `MultiAlgBlobClustering` driver (`MultiAlgBlobClustering.cxx`)
+
+The top-level `ITensorSetFilter` node. Its `operator()` method:
+
+1. **Load**: reads imaging cluster files via `as_pctrees`, builds the `Ensemble` with `"live"` and `"dead"` groupings.
+2. **Pipeline loop** (one iteration per `IEnsembleVisitor` in `m_pipeline`):
+   - Calls `cmeth.meth->visit(ensemble)`.
+   - Calls `perf.dump(cmeth.name, ensemble)` — logs cluster counts/point counts per grouping.
+   - Calls `grouping->enumerate_idents(m_clusters_id_order)` for all groupings — assigns stable numeric IDs to clusters.
+   - Iterates `m_bee_points_configs`: if the config's `visitor` field matches the current visitor name, calls `fill_bee_points` or `fill_bee_points_from_pr_graph` for that grouping.
+   - Iterates `m_bee_pf_configs`: if the config's `visitor` matches and the grouping has a track fitting result, calls `fill_bee_pf_tree`.
+3. **Post-pipeline**:
+   - Iterates remaining `m_bee_points_configs` (those with no `visitor` field, i.e., not visitor-specific).
+   - Calls `perf("dump live clusters to bee")`.
+   - Optionally calls `grouping2file` if `m_grouping2file_prefix` is set.
+   - For each grouping name, calls `ensemble.remove_child(grouping)` then `as_tensors(*node, outpath)` — serializes the grouping to tensors. The grouping is removed from the ensemble before serialization because `as_tensors` requires a root node.
+   - Assembles output as `as_tensorset(outtens, ident)`.
+
+### `EnsembleVisitor` struct (header `MultiAlgBlobClustering.h:246`)
+
+```cpp
+struct EnsembleVisitor {
+    std::string name;   // type/name string from config
+    IEnsembleVisitor::pointer meth;  // shared_ptr to visitor instance
+};
+std::vector<EnsembleVisitor> m_pipeline;
+```
+
+Visitors are resolved at configure time via `Factory::find_tn<IEnsembleVisitor>(tn)`.
+
+---
+
 ## Key design decisions
 
 - **Visitor pattern** keeps algorithms decoupled; new passes can be inserted without changing the driver.

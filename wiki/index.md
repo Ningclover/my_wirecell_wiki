@@ -1,6 +1,6 @@
 ---
 tags: [meta]
-updated: 2026-04-16
+updated: 2026-04-19
 ---
 
 # WireCell Wiki Index
@@ -89,6 +89,7 @@ Configuration files define how the algorithms above are wired and tuned for a sp
 - [[PDVD SP Filters]] — SP filter kernel parameters (ROI LF filters, Gaussian, Wiener, wire filters)
 - [[PDVD DNN ROI]] — DNN-based ROI finding: DNNROIFinding for U+V, W shunt, TorchService/TritonService
 - [[PDVD Imaging Configuration]] — 3D imaging: pre-proc, slicing (tick_span=4), tiling (GridTiling), charge solving
+- [[PDVD Clustering Configuration]] — Per-APA `MultiAlgBlobClustering` pipeline order (Pointed → LiveDead → Extend → Regular×2)
 
 ### ProtoDUNE-HD (pdhd) *(pending)*
 
