@@ -4,7 +4,7 @@ Append-only chronological record of all wiki operations.
 
 Format: `## [YYYY-MM-DD] <operation> | <description>`
 
-Quick grep for recent entries: `grep "^## \[" wiki/log.md | tail -10`
+Quick grep for recent entries: `grep "^## \[" log.md | tail -10`
 
 ---
 
