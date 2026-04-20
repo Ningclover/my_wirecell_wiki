@@ -10,8 +10,8 @@ You (Claude) own the `wiki/` directory entirely. You read from `raw/` but never 
 raw/          — immutable source documents (papers, code notes, talks, meeting notes)
 raw/assets/   — locally downloaded images referenced by source files
 wiki/         — all LLM-generated markdown pages
-wiki/index.md — content catalog (update on every ingest)
-wiki/log.md   — append-only chronological log (update on every operation)
+index.md      — content catalog (update on every ingest)
+log.md        — append-only chronological log (update on every operation)
 CLAUDE.md     — this file (schema and operating instructions)
 ```
 
@@ -125,30 +125,30 @@ When the user asks you to ingest a source (`raw/<file>`):
 2. Discuss key takeaways with the user if they want.
 3. Create a `wiki/source-<slug>.md` summary page.
 4. Update or create algorithm, component, concept, and experiment pages touched by the source.
-5. Update `wiki/index.md` — add the new source page and any new pages.
-6. Append to `wiki/log.md`: `## [YYYY-MM-DD] ingest | <Title>`.
+5. Update `index.md` — add the new source page and any new pages.
+6. Append to `log.md`: `## [YYYY-MM-DD] ingest | <Title>`.
 
 ### Query
 When the user asks a question:
-1. Read `wiki/index.md` to find relevant pages.
+1. Read `index.md` to find relevant pages.
 2. Read those pages and synthesize an answer with citations (`[[Page Title]]`).
 3. If the answer is valuable, offer to file it as `wiki/synthesis-<slug>.md`.
-4. If filed, update `wiki/index.md` and append to `wiki/log.md`.
+4. If filed, update `index.md` and append to `log.md`.
 
 ### Re-link
 When the user asks for a re-link pass (e.g., after a `git pull` that brought in pages from another server):
-1. Read `wiki/index.md` to collect all known page titles.
+1. Read `index.md` to collect all known page titles.
 2. For each wiki page, scan its body for unlinked mentions of known page titles and add `[[wikilinks]]`.
 3. Scan `See also` sections for missing obvious cross-references and add them.
 4. Fix any broken wikilinks pointing to non-existent pages (de-link or redirect to the correct page).
 5. Ensure every algorithm/component page has a `## Sources` section.
-6. Append `## [YYYY-MM-DD] relink` to `wiki/log.md`.
+6. Append `## [YYYY-MM-DD] relink` to `log.md`.
 
 ### Lint
 When the user asks for a wiki health check:
 - Look for: contradictions, stale claims, orphan pages, concepts mentioned but lacking their own page, missing cross-references, algorithms with no known-issues section.
 - Suggest papers or docs to look for that could fill gaps.
-- Append `## [YYYY-MM-DD] lint` to `wiki/log.md`.
+- Append `## [YYYY-MM-DD] lint` to `log.md`.
 
 ## Style guidelines
 
