@@ -98,3 +98,10 @@ Restructured index.md and CLAUDE.md to reflect module hierarchy.
 ## [2026-04-19] update | D3Vector::operator< and get_strategic_points deduplication
 - Updated [[Clustering Algorithms Internals]]: added `D3Vector::operator<` section documenting the correct lexicographic strict-weak-ordering implementation and the requirement that all three `else if` guards must be present
 - Updated `get_strategic_points` section: noted that deduplication sort uses `D3Vector::operator<` as comparator
+
+## [2026-04-25] ingest | PDHD SP deconvolution + ROI pipeline walkthrough
+- Updated [[OmnibusSigProc]]: full decon_2D_init step-by-step, m_nticks origin, filter variant table, save_data threshold chain, complete config parameter table
+- Updated [[ROI Formation]]: detailed cal_RMS algorithm, RMS propagation chain, stage-by-stage method, loose ROI peak detection details
+- Updated [[ROI Refinement]]: r_th_factor dual usage (load_data + CheckROIs), fake_signal_*_ind_factor effect table, ind_factor=0.15 anomaly explanation
+- Created [[PDHD Signal Processing Configuration]]: output archive contents, SP filter assignments, key tuning parameters, summary_wiener→imaging threshold chain
+- session record: source-session-2026-04-25-pdhd-sp-deconvolution.md

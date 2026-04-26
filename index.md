@@ -1,6 +1,6 @@
 ---
 tags: [meta]
-updated: 2026-04-19
+updated: 2026-04-25
 ---
 
 # WireCell Wiki Index
@@ -17,6 +17,7 @@ Raw source ingest records (`type: file`) and session records (`type: conversatio
 - [[source-clus-examination]] — All 9 documentation files from `clus/docs/`: full clus pipeline from clustering to neutrino tagging.
 - [[source-pdvd-wct-config]] — ProtoDUNE-VD Jsonnet configuration files controlling the actual WCT processing pipeline.
 - [[source-session-2026-04-14-clustering-internals]] — Code investigation session: heap corruption debugging in `clustering_extend.cxx`, `Find_Closest_Points` and `get_hull` internals.
+- [[source-session-2026-04-25-pdhd-sp-deconvolution]] — Full OmnibusSigProc deconvolution + ROI pipeline walkthrough; PDHD APA0 anomalous Wiener threshold root-cause; three-way config comparison.
 
 ---
 
@@ -91,7 +92,9 @@ Configuration files define how the algorithms above are wired and tuned for a sp
 - [[PDVD Imaging Configuration]] — 3D imaging: pre-proc, slicing (tick_span=4), tiling (GridTiling), charge solving
 - [[PDVD Clustering Configuration]] — Per-APA `MultiAlgBlobClustering` pipeline order (Pointed → LiveDead → Extend → Regular×2)
 
-### ProtoDUNE-HD (pdhd) *(pending)*
+### ProtoDUNE-HD (pdhd)
+
+- [[PDHD Signal Processing Configuration]] — SP filter assignments, per-APA parameter tuning, output archive contents, summary_wiener→imaging threshold chain
 
 ---
 
