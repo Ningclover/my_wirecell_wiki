@@ -1,7 +1,7 @@
 ---
 tags: [component, algorithm]
 sources: 2
-updated: 2026-04-25
+updated: 2026-04-26
 ---
 
 # OmnibusSigProc
@@ -148,7 +148,7 @@ Starting from NF-output waveforms in `m_r_data[plane]`:
     → keeps m_c_data current for subsequent filter applications
 ```
 
-After `decon_2D_init`, `m_r_data[plane]` = initial 2D-deconvolved waveform (electrons/tick/wire).
+After `decon_2D_init`, `m_r_data[plane]` = initial 2D-deconvolved waveform in **electrons per tick per wire**. See [[ADC to Electrons Signal Chain]] for the full unit conversion chain from raw ADC to e⁻.
 All subsequent `decon_2D_*` functions apply a new time-domain filter to the existing `m_c_data` and `inv_c2r` → trim to `(m_nwires, m_nticks)`.
 
 ## Filter variants and when each is applied
@@ -213,8 +213,10 @@ threshold.push_back(thresh);
 - [[ROI Formation]]
 - [[ROI Refinement]]
 - [[PDHD Signal Processing Configuration]]
+- [[ADC to Electrons Signal Chain]]
 
 ## Sources
 
 - [[source-sigproc-examination]]
 - [[source-session-2026-04-25-pdhd-sp-deconvolution]]
+- [[source-session-2026-04-26-adc-to-electrons]]

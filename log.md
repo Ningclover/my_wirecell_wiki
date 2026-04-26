@@ -105,3 +105,10 @@ Restructured index.md and CLAUDE.md to reflect module hierarchy.
 - Updated [[ROI Refinement]]: r_th_factor dual usage (load_data + CheckROIs), fake_signal_*_ind_factor effect table, ind_factor=0.15 anomaly explanation
 - Created [[PDHD Signal Processing Configuration]]: output archive contents, SP filter assignments, key tuning parameters, summary_wiener→imaging threshold chain
 - session record: source-session-2026-04-25-pdhd-sp-deconvolution.md
+
+## [2026-04-26] ingest | ADC to electrons signal amplitude chain
+- Created: `ADC to Electrons Signal Chain.md` — full unit chain from raw ADC → 2D deconvolution → e⁻/tick
+- Updated: `OmnibusSigProc.md` — added unit note after decon_2D_init, cross-link to new page
+- Updated: `PDHD Signal Processing Configuration.md` — added signal units section and cross-link
+- Updated: `index.md` — new page and session record added
+- session record: source-session-2026-04-26-adc-to-electrons.md

@@ -1,7 +1,7 @@
 ---
 tags: [experiment, algorithm]
 sources: 1
-updated: 2026-04-25
+updated: 2026-04-26
 ---
 
 # PDHD Signal Processing Configuration
@@ -69,13 +69,19 @@ ROI_formation::cal_RMS() on tight-filtered decon
      effective cut = 3.6σ per wire per tick
 ```
 
+## Signal units
+
+All `frame_wiener` and `frame_gauss` arrays are in **electrons per tick**. `summary_wiener` values are **electrons** (1σ noise RMS). See [[ADC to Electrons Signal Chain]] for the full conversion.
+
 ## See also
 
 - [[OmnibusSigProc]]
 - [[ROI Formation]]
 - [[ROI Refinement]]
+- [[ADC to Electrons Signal Chain]]
 - [[PDVD Signal Processing Configuration]]
 
 ## Sources
 
 - [[source-session-2026-04-25-pdhd-sp-deconvolution]]
+- [[source-session-2026-04-26-adc-to-electrons]]
