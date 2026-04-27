@@ -19,6 +19,7 @@ Raw source ingest records (`type: file`) and session records (`type: conversatio
 - [[source-session-2026-04-14-clustering-internals]] — Code investigation session: heap corruption debugging in `clustering_extend.cxx`, `Find_Closest_Points` and `get_hull` internals.
 - [[source-session-2026-04-25-pdhd-sp-deconvolution]] — Full OmnibusSigProc deconvolution + ROI pipeline walkthrough; PDHD APA0 anomalous Wiener threshold root-cause; three-way config comparison.
 - [[source-session-2026-04-26-adc-to-electrons]] — Signal amplitude chain: raw ADC → NF → 2D deconvolution → e⁻/tick; ADC_mV conversion, electronics response normalization, sign convention.
+- [[source-session-2026-04-26-pdvd-signal-chain]] — PDVD signal chain analysis: bottom vs top APA electronics, JsonElecResponse units, postgain as effective gain rescaling, comparison to PDHD.
 
 ---
 
@@ -97,6 +98,7 @@ Configuration files define how the algorithms above are wired and tuned for a sp
 
 - [[PDHD Signal Processing Configuration]] — SP filter assignments, per-APA parameter tuning, output archive contents, summary_wiener→imaging threshold chain
 - [[ADC to Electrons Signal Chain]] — Full amplitude chain: raw ADC → 2D deconvolution → e⁻/tick; ADC_mV conversion, electronics response units, sign convention
+- [[PDVD vs PDHD Signal Chain Comparison]] — Side-by-side: electronics type/gain, ADC fullscale, postgain, Resampler, ShieldCouplingSub, ADC/e⁻ sensitivity for bottom/top/PDHD
 
 ---
 
