@@ -1,6 +1,6 @@
 ---
 tags: [meta]
-updated: 2026-04-26
+updated: 2026-04-29
 ---
 
 # WireCell Wiki Index
@@ -20,12 +20,18 @@ Raw source ingest records (`type: file`) and session records (`type: conversatio
 - [[source-session-2026-04-25-pdhd-sp-deconvolution]] — Full OmnibusSigProc deconvolution + ROI pipeline walkthrough; PDHD APA0 anomalous Wiener threshold root-cause; three-way config comparison.
 - [[source-session-2026-04-26-adc-to-electrons]] — Signal amplitude chain: raw ADC → NF → 2D deconvolution → e⁻/tick; ADC_mV conversion, electronics response normalization, sign convention.
 - [[source-session-2026-04-26-pdvd-signal-chain]] — PDVD signal chain analysis: bottom vs top APA electronics, JsonElecResponse units, postgain as effective gain rescaling, comparison to PDHD.
+- [[source-session-2026-04-29-track-sim-geometry]] — Sim-track placement for ProtoDUNE-VD/HD per-anode validation: wires-JSON schema, active drift bounds, reframer tick origin, pdhd `elecGain` extVar.
 
 ---
 
 ## Algorithms
 
 Algorithms are organized by toolkit module. Each module has sub-sections matching its internal structure.
+
+### General / Cross-cutting
+
+- [[WireCell Wires Schema]] — JSON wire-geometry format (`Store.{anodes,faces,planes,wires,points}`), list-position vs ident references, per-detector counts.
+- [[WireCell Sim Track Conventions]] — Track depo construction (`sim.tracks`, charge=-500 MIP), active-volume placement constraint, reframer tick origin, expected hot-channel counts.
 
 ### sigproc
 
@@ -96,6 +102,7 @@ Configuration files define how the algorithms above are wired and tuned for a sp
 
 ### ProtoDUNE-HD (pdhd)
 
+- [[pdhd Detector Parameters]] — Geometry, ADC/electronics, `elecGain` extVar, sim overrides (DL/DT/lifetime/drift_speed), NF intraces wildcard, channel layout
 - [[PDHD Signal Processing Configuration]] — SP filter assignments, per-APA parameter tuning, output archive contents, summary_wiener→imaging threshold chain
 - [[ADC to Electrons Signal Chain]] — Full amplitude chain: raw ADC → 2D deconvolution → e⁻/tick; ADC_mV conversion, electronics response units, sign convention
 - [[PDVD vs PDHD Signal Chain Comparison]] — Side-by-side: electronics type/gain, ADC fullscale, postgain, Resampler, ShieldCouplingSub, ADC/e⁻ sensitivity for bottom/top/PDHD

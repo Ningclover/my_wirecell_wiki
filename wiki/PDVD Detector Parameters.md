@@ -1,7 +1,7 @@
 ---
 tags: [concept, experiment]
-sources: 1
-updated: 2026-04-14
+sources: 2
+updated: 2026-04-29
 ---
 
 # PDVD Detector Parameters
@@ -79,6 +79,30 @@ Previous/alternative: `protodunevd_FR_3view_speed1d55.json.bz2` (commented out)
 | Simulation mode | Fixed time (LArSoft-compatible) |
 | Readout start time (tick 0) | −250 µs (G4 time) |
 
+## Active drift volume / x-coordinate layout
+
+VD anodes 0–3 sit at negative x (`sign = −1` in `params.jsonnet:45`); anodes 4–7 mirror at positive x. The drift volume for each anode is bounded by the anode-cut plane (closer to the wires) and the cathode plane (at the central CPA). Both depo bounds and the response plane are computed from `apa_cpa`, `apa_w2w`, `apa_g2g`, and `cpa_thick`:
+
+```
+centerline   = sign × apa_cpa                       = ±341.55 cm
+apa_plane    = 0.5 × apa_g2g                        = +5.715 cm offset (toward cathode)
+res_plane    = 0.5 × apa_w2w + response_plane       = +22.39 cm offset
+cpa_plane    = apa_cpa − 0.5 × cpa_thick            = +338.99 cm offset
+```
+
+For anode 0 (negative-x volume) the bounds are therefore:
+
+| Plane | x (cm) |
+|-------|--------|
+| Wire plane (W collection) | −341.55 |
+| Anode-cut plane | −335.83 |
+| Response plane | −319.16 |
+| Cathode plane | −2.56 |
+
+> **Constraint:** depos with x **outside** [anode_plane, cathode_plane] are dropped before drifting (`params.jsonnet:31–34`). Depos between `anode_plane` and `response_plane` may be "backed up" to the response plane (no proper field response). For a clean simulated track, place it at or below the response plane on the cathode side.
+
+The reframer trims `tbin = elec.fields.nticks = drift_dt / tick = (response_plane / drift_speed) / tick` ticks off the front of the per-anode pipeline output (`pgrapher/common/params.jsonnet:194`). Effective tick 0 of the readout corresponds to the moment a depo at the response plane reaches the wires. Drift offsets beyond the response plane delay the track in ticks at a rate of `drift_speed / tick = 1.473 mm/μs ÷ 0.5 μs/tick ≈ 2.95 mm/tick`.
+
 ## Channel layout (funcs.jsonnet)
 
 Each CRP = 2 CRUs × 3072 channels:
@@ -88,8 +112,9 @@ Each CRP = 2 CRUs × 3072 channels:
 
 ## See also
 
-[[ProtoDUNE-VD WireCell Configuration Overview]], [[PDVD Noise Filtering Configuration]], [[PDVD Signal Processing Configuration]], [[Detector-Specific Signal Processing]]
+[[ProtoDUNE-VD WireCell Configuration Overview]], [[PDVD Noise Filtering Configuration]], [[PDVD Signal Processing Configuration]], [[Detector-Specific Signal Processing]], [[WireCell Wires Schema]], [[WireCell Sim Track Conventions]]
 
 ## Sources
 
 - [[source-pdvd-wct-config]]
+- [[source-session-2026-04-29-track-sim-geometry]]

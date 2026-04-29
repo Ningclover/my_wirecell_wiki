@@ -112,3 +112,12 @@ Restructured index.md and CLAUDE.md to reflect module hierarchy.
 - Updated: `PDHD Signal Processing Configuration.md` — added signal units section and cross-link
 - Updated: `index.md` — new page and session record added
 - session record: source-session-2026-04-26-adc-to-electrons.md
+
+## [2026-04-29] ingest | track-sim geometry & pdhd parameters
+- Created [[WireCell Wires Schema]] — JSON wires file format, list-position-vs-ident gotcha, per-detector record counts, plane order, HD cathode-facing-face table
+- Created [[WireCell Sim Track Conventions]] — `sim.tracks` MIP convention, active-volume constraint (depo-x must be inside `[anode_plane, cathode_plane]`), reframer tick origin, expected hot-channel counts per plane
+- Created [[pdhd Detector Parameters]] — full pdhd parameter page: geometry, active drift volume, `elecGain` extVar (must be `-V`/`--ext-str`, not `--ext-code`), `nf.jsonnet:intraces:''` wildcard, channel layout
+- Updated [[PDVD Detector Parameters]] — added Active drift volume / x-coordinate layout section with anode/response/cathode plane offsets and reframer tick-origin note
+- Added new "General / Cross-cutting" Algorithms sub-section to index.md
+- Promoted `ProtoDUNE-HD (pdhd)` index sub-section out of *(pending)* state
+- session record: source-session-2026-04-29-track-sim-geometry.md
