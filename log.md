@@ -121,3 +121,9 @@ Restructured index.md and CLAUDE.md to reflect module hierarchy.
 - Added new "General / Cross-cutting" Algorithms sub-section to index.md
 - Promoted `ProtoDUNE-HD (pdhd)` index sub-section out of *(pending)* state
 - session record: source-session-2026-04-29-track-sim-geometry.md
+
+## [2026-05-03] ingest | PDVD field response computation pipeline (pochoir)
+- Created [[PDVD Field Response Computation]] — full 10-stage pipeline doc: domain, gen, FDM, bc-interp, extendwf, velo, drift, induce, convertfr
+- Updated [[PDVD Detector Parameters]] — added link to FR computation page in "Field response" section
+- Added new PDVD index entry for [[PDVD Field Response Computation]]
+- session record: source-session-2026-05-03-pdvd-field-response.md

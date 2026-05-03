@@ -1,7 +1,7 @@
 ---
 tags: [concept, experiment]
 sources: 2
-updated: 2026-04-29
+updated: 2026-05-03
 ---
 
 # PDVD Detector Parameters
@@ -60,6 +60,8 @@ Current field response: `protodunevd_FR_norminal_260324.json.bz2`
 Previous/alternative: `protodunevd_FR_3view_speed1d55.json.bz2` (commented out)
 
 > **Note:** `ctoffset = 4 µs` in `sp.jsonnet` is explicitly set to be consistent with this field response file.
+
+The FR file is computed using the `pochoir` toolkit via a 10-stage 3D electrostatics + drift simulation pipeline. See [[PDVD Field Response Computation]] for the full procedure.
 
 ## Noise spectra
 

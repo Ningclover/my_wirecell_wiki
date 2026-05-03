@@ -1,6 +1,6 @@
 ---
 tags: [meta]
-updated: 2026-04-29
+updated: 2026-05-03
 ---
 
 # WireCell Wiki Index
@@ -21,6 +21,7 @@ Raw source ingest records (`type: file`) and session records (`type: conversatio
 - [[source-session-2026-04-26-adc-to-electrons]] — Signal amplitude chain: raw ADC → NF → 2D deconvolution → e⁻/tick; ADC_mV conversion, electronics response normalization, sign convention.
 - [[source-session-2026-04-26-pdvd-signal-chain]] — PDVD signal chain analysis: bottom vs top APA electronics, JsonElecResponse units, postgain as effective gain rescaling, comparison to PDHD.
 - [[source-session-2026-04-29-track-sim-geometry]] — Sim-track placement for ProtoDUNE-VD/HD per-anode validation: wires-JSON schema, active drift bounds, reframer tick origin, pdhd `elecGain` extVar.
+- [[source-session-2026-05-03-pdvd-field-response]] — Full PDVD field response computation pipeline using `pochoir`: 10-stage 3D electrostatics + drift simulation producing `FR_xn_new.json.bz2`.
 
 ---
 
@@ -99,6 +100,7 @@ Configuration files define how the algorithms above are wired and tuned for a sp
 - [[PDVD DNN ROI]] — DNN-based ROI finding: DNNROIFinding for U+V, W shunt, TorchService/TritonService
 - [[PDVD Imaging Configuration]] — 3D imaging: pre-proc, slicing (tick_span=4), tiling (GridTiling), charge solving
 - [[PDVD Clustering Configuration]] — Per-APA `MultiAlgBlobClustering` pipeline order (Pointed → LiveDead → Extend → Regular×2)
+- [[PDVD Field Response Computation]] — 10-stage `pochoir` pipeline: domain → gen → FDM → bc-interp → extendwf → drift → induce → convertfr; produces `FR_xn_new.json.bz2`
 
 ### ProtoDUNE-HD (pdhd)
 
