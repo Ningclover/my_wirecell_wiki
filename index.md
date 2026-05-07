@@ -1,6 +1,6 @@
 ---
 tags: [meta]
-updated: 2026-05-07 (relink)
+updated: 2026-05-07 (deghosting analysis)
 ---
 
 # WireCell Wiki Index
@@ -23,6 +23,7 @@ Raw source ingest records (`type: file`) and session records (`type: conversatio
 - [[source-session-2026-04-29-track-sim-geometry]] — Sim-track placement for ProtoDUNE-VD/HD per-anode validation: wires-JSON schema, active drift bounds, reframer tick origin, pdhd `elecGain` extVar.
 - [[source-session-2026-05-03-pdvd-field-response]] — Full PDVD field response computation pipeline using `pochoir`: 10-stage 3D electrostatics + drift simulation producing `FR_xn_new.json.bz2`.
 - [[source-img-examination]] — Systematic code examination of `img/` (~38 source files): pipeline overview, slicing/tiling, charge solving, deghosting, 18 bugs (13 fixed), 15 efficiency issues (7 fixed).
+- [[source-session-2026-05-07-deghosting]] — Source-level investigation of all 5 deghosting components across img/ and clus/: multi-round InSliceDeghosting, ProjectionDeghosting, ClusteringDeghost, deghost_clusters, deghost_segments.
 
 ---
 
@@ -74,6 +75,7 @@ Pattern recognition module: 3D blob cloud → particle trajectories + neutrino v
 - [[Track Fitting and Calorimetry]] — Wire→space projection, dQ/dx measurement, Box recombination model, ParticleDataSet
 - [[Particle Identification]] — is_shower predicate, determine_direction dispatch, BFS PDG propagation
 - [[Neutrino Taggers]] — NuMu, NuE, Pi0, Cosmic, SSM, SinglePhoton criteria and outputs
+- [[Clus Deghosting]] — ClusteringDeghost (longest-first 2D kd-tree, single-APA); deghost_clusters (3-cloud segment-level, 4 criteria); deghost_segments (terminal arm pruning)
 
 ---
 
@@ -84,7 +86,7 @@ Pattern recognition module: 3D blob cloud → particle trajectories + neutrino v
 - [[WireCell Imaging Pipeline Overview]] — component zoo, cluster graph structure, data interfaces, RayGrid, live/dead categories
 - [[Slicing and Tiling]] — MaskSlice, SumSlice, GridTiling, BlobGrouping, BlobClustering, GeomClusteringUtil
 - [[Charge Solving]] — ChargeSolving, CSGraph LASSO with Cholesky whitening, BlobSolving, ChargeErrorFrameEstimator
-- [[Imaging Deghosting]] — InSliceDeghosting (wire-score + adjacency), Projection2D, ProjectionDeghosting, ShadowGhosting
+- [[Imaging Deghosting]] — InSliceDeghosting 3 rounds (wire-score, charge-ratio, POTENTIAL_GOOD keep), Projection2D, ProjectionDeghosting (2-pass projection coverage), ShadowGhosting (stub)
 
 ### charge-light matching *(pending)*
 
@@ -123,3 +125,4 @@ Configuration files define how the algorithms above are wired and tuned for a sp
 - [[SigProc Efficiency Issues]] — Consolidated 25-issue efficiency list with fix status
 - [[Img Bug List]] — 18-bug list from `img/` examination (13 fixed, 5 not fixed)
 - [[Img Efficiency Issues]] — 15-issue efficiency list from `img/` examination (7 fixed, 8 not fixed); hardcoded constants table for PDHD porting
+- [[Deghosting Comparison]] — All 5 deghosting components: pipeline position, granularity, distance thresholds, philosophy, multi-APA handling

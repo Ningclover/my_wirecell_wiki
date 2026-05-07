@@ -170,3 +170,14 @@ Comprehensive audit of all 50 wiki pages. Issues found and fixed:
 - `pdhd Detector Parameters` → `[[PDHD Signal Processing Configuration]]`
 - `PDHD Signal Processing Configuration` → `[[pdhd Detector Parameters]]`
 - `ADC to Electrons Signal Chain` → `[[pdhd Detector Parameters]]`, `[[PDVD vs PDHD Signal Chain Comparison]]`
+
+## [2026-05-07] ingest | Deghosting algorithms — img/ and clus/ deep dive
+Read all deghosting source files: `img/src/InSliceDeghosting.cxx` (897 lines), `img/src/ProjectionDeghosting.cxx` (473 lines), `img/src/ShadowGhosting.cxx` (65 lines), `clus/src/clustering_deghost.cxx` (783 lines), `clus/src/NeutrinoDeghoster.cxx` (621 lines), plus review docs.
+
+Pages created:
+- `wiki/Clus Deghosting.md` — ClusteringDeghost + deghost_clusters/segments
+- `wiki/Deghosting Comparison.md` — synthesis page comparing all 5 components
+- `wiki/source-session-2026-05-07-deghosting.md` — session record
+
+Pages updated:
+- `wiki/Imaging Deghosting.md` — rewritten with accurate 3-round InSliceDeghosting structure, source-level detail on ProjectionDeghosting 2-pass algorithm
