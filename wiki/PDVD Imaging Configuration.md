@@ -91,6 +91,9 @@ BlobClustering → ChargeSolving(uniform) → LocalGeomClustering → ChargeSolv
 
 ## See also
 
+- [[WireCell Imaging Pipeline Overview]] — algorithm-level documentation for all imaging components used here
+- [[Slicing and Tiling]] — MaskSlice, GridTiling, BlobClustering details
+- [[Charge Solving]] — ChargeSolving, CSGraph LASSO details
 - [[ProtoDUNE-VD WireCell Configuration Overview]]
 - [[PDVD Signal Processing Configuration]]
 - [[WireCell Clus Pipeline Overview]] — downstream consumer of imaging blobs

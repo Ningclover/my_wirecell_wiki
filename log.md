@@ -127,3 +127,46 @@ Restructured index.md and CLAUDE.md to reflect module hierarchy.
 - Updated [[PDVD Detector Parameters]] — added link to FR computation page in "Field response" section
 - Added new PDVD index entry for [[PDVD Field Response Computation]]
 - session record: source-session-2026-05-03-pdvd-field-response.md
+
+## [2026-05-07] ingest | WireCell img/ package — 3D imaging pipeline
+
+Source: `wirecell-working/toolkit/img/` (~38 source files, examinations docs)
+
+Pages created:
+- [[source-img-examination]] — ingest record
+- [[WireCell Imaging Pipeline Overview]] — component zoo, cluster graph, RayGrid, live/dead categories
+- [[Slicing and Tiling]] — MaskSlice, SumSlice, GridTiling, BlobGrouping, BlobClustering, GeomClusteringUtil
+- [[Charge Solving]] — ChargeSolving, CSGraph LASSO + Cholesky whitening, BlobSolving, ChargeErrorFrameEstimator
+- [[Imaging Deghosting]] — InSliceDeghosting, Projection2D, ProjectionDeghosting, ShadowGhosting
+- [[Img Bug List]] — 18 bugs (13 fixed, 5 not fixed)
+- [[Img Efficiency Issues]] — 15 efficiency issues (7 fixed, 8 not fixed); PDHD porting constants table
+
+Index updated: imaging section filled in (was "pending").
+
+## [2026-05-07] relink
+
+Comprehensive audit of all 50 wiki pages. Issues found and fixed:
+
+**Broken wikilinks (2 files):**
+- `[[PMT Noise Filter]]` de-linked in `Omnibus Noise Filter` (content is already in that page) and `WireCellSigProc Pipeline Overview` (redirected to `[[Omnibus Noise Filter]]`)
+
+**Wrong/missing frontmatter (4 files):**
+- `SigProc Bug List`, `SigProc Efficiency Issues`: tag `[meta]` → `[synthesis]`
+- `PDVD vs PDHD Signal Chain Comparison`: non-schema tag `comparison` → `synthesis`
+- `PDVD Field Response Computation`: added missing `sources: 1`
+
+**Module-boundary cross-references added (9 files):**
+- `OmnibusSigProc` → `[[WireCell Imaging Pipeline Overview]]`
+- `ROI Formation` → `[[Slicing and Tiling]]` (summary_wiener chain)
+- `WireCell Imaging Pipeline Overview` → `[[WireCellSigProc Pipeline Overview]]`, `[[WireCell Clus Pipeline Overview]]`
+- `Slicing and Tiling` → `[[OmnibusSigProc]]`, `[[ROI Formation]]`
+- `WireCell Clus Pipeline Overview` → `[[WireCell Imaging Pipeline Overview]]`
+- `PDVD Imaging Configuration` → `[[WireCell Imaging Pipeline Overview]]`, `[[Slicing and Tiling]]`, `[[Charge Solving]]`
+
+**Wrong See Also link fixed (1 file):**
+- `Track Fitting and Calorimetry`: `[[PDVD Signal Processing Configuration]]` → `[[PDVD Detector Parameters]]` (drift/diffusion parameters)
+
+**Symmetric detector↔config links added (3 files):**
+- `pdhd Detector Parameters` → `[[PDHD Signal Processing Configuration]]`
+- `PDHD Signal Processing Configuration` → `[[pdhd Detector Parameters]]`
+- `ADC to Electrons Signal Chain` → `[[pdhd Detector Parameters]]`, `[[PDVD vs PDHD Signal Chain Comparison]]`

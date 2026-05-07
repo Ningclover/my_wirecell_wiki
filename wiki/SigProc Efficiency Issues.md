@@ -1,5 +1,5 @@
 ---
-tags: [meta]
+tags: [synthesis]
 sources: 1
 updated: 2026-04-14
 ---

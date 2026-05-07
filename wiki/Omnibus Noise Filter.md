@@ -40,7 +40,7 @@ Bad channels from noise database are zero-filled before processing.
 
 ## Related component: PMT Noise Filter
 
-[[PMT Noise Filter]] (`OmnibusPMTNoiseFilter`) removes cross-talk from photomultiplier tubes:
+PMT Noise Filter (`OmnibusPMTNoiseFilter`) removes cross-talk from photomultiplier tubes:
 1. Identify PMT ROIs on collection wires (large negative excursions)
 2. Identify associated induction wire signals
 3. Replace affected regions with linear interpolation

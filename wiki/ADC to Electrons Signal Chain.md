@@ -111,7 +111,9 @@ The `(-1)` in `ewave` scaling (`OmnibusSigProc.cxx:853`) is needed because:
 
 - [[OmnibusSigProc]]
 - [[ROI Formation]]
+- [[pdhd Detector Parameters]]
 - [[PDHD Signal Processing Configuration]]
+- [[PDVD vs PDHD Signal Chain Comparison]]
 
 ## Sources
 

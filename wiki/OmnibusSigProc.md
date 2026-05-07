@@ -214,6 +214,7 @@ threshold.push_back(thresh);
 - [[ROI Refinement]]
 - [[PDHD Signal Processing Configuration]]
 - [[ADC to Electrons Signal Chain]]
+- [[WireCell Imaging Pipeline Overview]] — consumes this module's `wiener`/`gauss` frame output
 
 ## Sources
 

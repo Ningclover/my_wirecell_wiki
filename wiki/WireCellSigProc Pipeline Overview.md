@@ -36,7 +36,7 @@ Three-pass architecture in [[Omnibus Noise Filter]]:
 2. **Grouped filters** — coherent noise subtraction (compute median across ASIC group, subtract with signal protection)
 3. **Per-channel status** — final noisy channel tagging
 
-Optional: [[PMT Noise Filter]] removes PMT cross-talk into TPC wires.
+Optional: PMT Noise Filter ([[Omnibus Noise Filter]]) removes PMT cross-talk into TPC wires.
 
 ## Stage 2: Signal Processing
 

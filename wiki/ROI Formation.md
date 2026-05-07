@@ -147,6 +147,7 @@ OmnibusSigProc:
 - [[OmnibusSigProc]]
 - [[ROI Refinement]]
 - [[PDHD Signal Processing Configuration]]
+- [[Slicing and Tiling]] — `summary_wiener` (per-wire RMS produced here) drives MaskSlice activity thresholds
 
 ## Sources
 

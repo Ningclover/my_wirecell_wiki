@@ -1,5 +1,5 @@
 ---
-tags: [algorithm, concept, comparison]
+tags: [algorithm, concept, synthesis]
 sources: 2
 updated: 2026-04-26
 ---

@@ -145,7 +145,7 @@ When multiple anodes are stored in one frame, channels are offset by `2560 × an
 
 ## See also
 
-[[WireCell Wires Schema]], [[WireCell Sim Track Conventions]], [[PDVD Detector Parameters]], [[Detector-Specific Signal Processing]]
+[[WireCell Wires Schema]], [[WireCell Sim Track Conventions]], [[PDVD Detector Parameters]], [[Detector-Specific Signal Processing]], [[PDHD Signal Processing Configuration]]
 
 ## Sources
 

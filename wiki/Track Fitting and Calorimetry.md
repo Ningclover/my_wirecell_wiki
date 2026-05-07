@@ -98,7 +98,7 @@ A detector-agnostic lookup table of dE/dx vs kinetic energy (and range-energy) f
 - [[Clus Data Structures]]
 - [[Track Shower Separation]]
 - [[Particle Identification]]
-- [[PDVD Signal Processing Configuration]]
+- [[PDVD Detector Parameters]] — drift speed, DL/DT diffusion coefficients used in TrackFitting::Parameters
 
 ## Sources
 

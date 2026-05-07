@@ -1,6 +1,6 @@
 ---
 tags: [meta]
-updated: 2026-05-03
+updated: 2026-05-07 (relink)
 ---
 
 # WireCell Wiki Index
@@ -22,6 +22,7 @@ Raw source ingest records (`type: file`) and session records (`type: conversatio
 - [[source-session-2026-04-26-pdvd-signal-chain]] — PDVD signal chain analysis: bottom vs top APA electronics, JsonElecResponse units, postgain as effective gain rescaling, comparison to PDHD.
 - [[source-session-2026-04-29-track-sim-geometry]] — Sim-track placement for ProtoDUNE-VD/HD per-anode validation: wires-JSON schema, active drift bounds, reframer tick origin, pdhd `elecGain` extVar.
 - [[source-session-2026-05-03-pdvd-field-response]] — Full PDVD field response computation pipeline using `pochoir`: 10-stage 3D electrostatics + drift simulation producing `FR_xn_new.json.bz2`.
+- [[source-img-examination]] — Systematic code examination of `img/` (~38 source files): pipeline overview, slicing/tiling, charge solving, deghosting, 18 bugs (13 fixed), 15 efficiency issues (7 fixed).
 
 ---
 
@@ -76,9 +77,14 @@ Pattern recognition module: 3D blob cloud → particle trajectories + neutrino v
 
 ---
 
-### imaging *(pending)*
+### imaging
 
-3D imaging module: charge-solved blob generation from wire-plane hits. Expected after next ingest.
+3D imaging module: frame → slices → blobs → clusters → charge solving → deghosting.
+
+- [[WireCell Imaging Pipeline Overview]] — component zoo, cluster graph structure, data interfaces, RayGrid, live/dead categories
+- [[Slicing and Tiling]] — MaskSlice, SumSlice, GridTiling, BlobGrouping, BlobClustering, GeomClusteringUtil
+- [[Charge Solving]] — ChargeSolving, CSGraph LASSO with Cholesky whitening, BlobSolving, ChargeErrorFrameEstimator
+- [[Imaging Deghosting]] — InSliceDeghosting (wire-score + adjacency), Projection2D, ProjectionDeghosting, ShadowGhosting
 
 ### charge-light matching *(pending)*
 
@@ -115,3 +121,5 @@ Configuration files define how the algorithms above are wired and tuned for a sp
 
 - [[SigProc Bug List]] — Consolidated 40-bug list with fix status
 - [[SigProc Efficiency Issues]] — Consolidated 25-issue efficiency list with fix status
+- [[Img Bug List]] — 18-bug list from `img/` examination (13 fixed, 5 not fixed)
+- [[Img Efficiency Issues]] — 15-issue efficiency list from `img/` examination (7 fixed, 8 not fixed); hardcoded constants table for PDHD porting

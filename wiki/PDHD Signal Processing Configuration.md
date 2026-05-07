@@ -75,6 +75,7 @@ All `frame_wiener` and `frame_gauss` arrays are in **electrons per tick**. `summ
 
 ## See also
 
+- [[pdhd Detector Parameters]]
 - [[OmnibusSigProc]]
 - [[ROI Formation]]
 - [[ROI Refinement]]

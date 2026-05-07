@@ -111,7 +111,8 @@ Visitors are resolved at configure time via `Factory::find_tn<IEnsembleVisitor>(
 - [[Neutrino Vertex Determination]]
 - [[Particle Identification]]
 - [[Neutrino Taggers]]
-- [[PDVD Imaging Configuration]] — upstream imaging step that produces the blob input
+- [[WireCell Imaging Pipeline Overview]] — upstream imaging module that produces the blob input
+- [[PDVD Imaging Configuration]] — PDVD-specific imaging config (blobs → clusters entry point)
 
 ## Sources
 
