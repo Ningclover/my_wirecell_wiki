@@ -1,7 +1,7 @@
 ---
 tags: [experiment, algorithm]
 sources: 1
-updated: 2026-04-26
+updated: 2026-05-07
 ---
 
 # PDHD Signal Processing Configuration
@@ -48,14 +48,14 @@ Each `FrameFileSink` produces a `.tar.bz2` per APA containing:
 
 ## Key SP tuning parameters (sp.jsonnet)
 
-| Parameter | Local (APA0) | Upstream / WCP-validation | Effect |
+| Parameter | Xuyang's art/LArSoft config (APA0) | dunereco / WCP-validation | Effect |
 |---|---|---|---|
 | `r_fake_signal_low_th_ind_factor` | **0.15** | 1.0 | Induction mean-charge fake-signal gate multiplier |
 | `r_fake_signal_high_th_ind_factor` | **0.15** | 1.0 | Induction peak-charge fake-signal gate multiplier |
 | `r_th_factor` | 3.0 (all APAs) | 2.5 for APA0, 3.0 others | ROI admission + connectivity SNR floor |
 | `r_low_peak_sep_threshold_pre` | 1200 | 1200 | Pre-separation threshold for BreakROI |
 
-The `_ind_factor = 0.15` on APA0 (local config) lowers effective induction thresholds to 75/150 e⁻ (vs 500/1000 upstream), causing nearly all noise ROIs to survive `CleanUpInductionROIs`. This was identified as the root cause of anomalous `summary_wiener` values on APA0 V/W channels in run 027409.
+The `_ind_factor = 0.15` was in a **local art/LArSoft processing config** (not tracked in `dunereco` or `toolkit` repos), which lowered effective induction thresholds to 75/150 e⁻ (vs 375/750 from `r_fake_signal_low/high_th`), causing nearly all noise ROIs to survive `CleanUpInductionROIs`. This was identified as the root cause of anomalous `summary_wiener` values on APA0 V/W channels in run 027409. The tracked `dunereco` repo has `ind_factor = 1.0` for all APAs from the first commit.
 
 
 ## `summary_wiener` → imaging threshold chain

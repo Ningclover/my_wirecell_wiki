@@ -1,32 +1,42 @@
 ---
 tags: [algorithm]
 sources: 1
-updated: 2026-04-16
+updated: 2026-05-07
 ---
 
 # Steiner Graph
 
 The Steiner graph is a minimal spanning skeleton built from a cluster's blobs. It is the primary input for the [[Pattern Recognition PR Loop]] and vertex finding.
 
-## Construction (Stage 4: CreateSteinerGraph)
+## Construction (CreateSteinerGraph component)
+
+**Source:** `clus/src/CreateSteinerGraph.cxx`, `clus/src/SteinerGrapher.cxx`
 
 ### Step 1: Retiling via ImproveCluster_2
 
-Before building the graph, the cluster is "retiled" to produce a more uniform point spacing:
+Before building the graph, the cluster is "retiled" to produce a more uniform point spacing. A `BlobSampler` resamples each blob to ~3 mm target spacing. This repairs gaps introduced by dead wires or imaging artifacts. The result is stored as the `"default"` named point cloud on the cluster.
 
-- Blobs are projected onto wire planes and re-segmented at a finer granularity
-- The result is a denser, more uniform set of 3D points covering the cluster volume
-- This step repairs gaps introduced by dead wires or imaging artifacts
+### Step 2: Voronoi tessellation
 
-### Step 2: Neighbor search (k-d tree)
+`create_enhanced_steiner_graph()` (`SteinerGrapher.cxx:898`) takes the base neighbor graph and the set of **steiner terminal** vertices (branch points and endpoints identified in the base graph). It runs Dijkstra simultaneously from all terminals — producing a Voronoi diagram over the graph, where each vertex is assigned to its nearest terminal (`vor.terminal[v]`) and its distance (`vor.distance[v]`).
 
-A k-d tree is built over the retiled blob centers. For each point, its k nearest neighbors are found (k is configurable, typically 3–5). This produces a candidate edge set.
+### Step 3: Inter-terminal path construction
 
-### Step 3: Kruskal MST
+For each edge in the base graph that crosses a Voronoi boundary (connects vertices owned by different terminals), the total path distance is computed as:
+```
+total = vor.distance[u] + edge_weight + vor.distance[v]
+```
+The best (minimum-cost) edge for each terminal pair is selected. Then for each selected edge, the Voronoi back-path to each terminal is traced, collecting all intermediate graph edges.
 
-Kruskal's algorithm is run on the candidate edges (weighted by Euclidean distance) to produce the **minimum spanning tree** — the Steiner graph skeleton.
+### Step 4: Build reduced graph
 
-The MST is stored as the `"steiner"` named graph on the cluster (see [[Clus Data Structures]]).
+All unique edges from the Voronoi paths (deduped, sorted by vertex-index pair for determinism) are assembled into the reduced Steiner graph with **charge-weighted** edge costs:
+```
+final_distance = geometric_distance × (factor1 + factor2 × 0.5×(Q0/(Qs+Q0) + Q0/(Qt+Q0)))
+```
+where `Q0=10000`, `factor1=0.8`, `factor2=0.4` (from WCP prototype).
+
+The result is stored as the `"steiner_graph"` named graph on the cluster (`Cluster::give_graph("steiner_graph", ...)`).
 
 ## Vertex degree semantics
 
@@ -40,9 +50,11 @@ Vertex degree in the Steiner graph carries physical meaning:
 
 The [[Pattern Recognition PR Loop]] uses degree-≥3 vertices as initial neutrino vertex candidates.
 
-## Why MST?
+## Why Voronoi + path expansion?
 
-The MST minimizes total wire length while connecting all points — it produces a topologically correct skeleton without loops, which simplifies downstream graph traversal and vertex finding. Loops appear only if the retiled point cloud has genuine closed-path topology (e.g., a ring-shaped shower), and they are handled separately.
+True Steiner tree construction is NP-hard. The Voronoi-based approach approximates it: each terminal "claims" its nearby region, and only inter-region boundary edges contribute to the reduced graph. This gives a skeleton that connects all terminal points with near-minimal total path length while preserving the topology of the underlying particle trajectories. The charge weighting steers the graph away from low-charge (noise) regions toward real signal.
+
+Note: `recover_steiner_graph` (which uses Kruskal MST over the terminal graph) exists in the WCP prototype but is **not ported** to the WireCell Toolkit — it is not used in any current NeutrinoTagger/PR code path.
 
 ## See also
 
@@ -53,3 +65,4 @@ The MST minimizes total wire length while connecting all points — it produces 
 ## Sources
 
 - [[source-clus-examination]]
+- verified 2026-05-07 against `SteinerGrapher.cxx:20-124, 898-1074`, `CreateSteinerGraph.cxx:151-178`, `clus/docs/steiner_graph.md`, `clus/docs/patternrecognition/steiner_graph_review.md`

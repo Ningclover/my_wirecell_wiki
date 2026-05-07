@@ -1,7 +1,7 @@
 ---
 tags: [algorithm]
 sources: 2
-updated: 2026-04-25
+updated: 2026-05-07
 ---
 
 # ROI Refinement
@@ -46,7 +46,7 @@ ROI_refinement roi_refine(
 
 Used in **two places**:
 
-1. **`load_data()` — tight ROI admission gate** (`ROI_refinement.cxx:321`):
+1. **`load_data()` — tight ROI admission gate** (`ROI_refinement.cxx:323`):
    ```cpp
    float threshold = plane_rms.at(irow) * th_factor;
    if (tight_roi->get_above_threshold(threshold).size() == 0) {
@@ -54,28 +54,28 @@ Used in **two places**:
        continue;
    }
    ```
-   Every tight ROI from `ROI_formation` is tested. If no single tick exceeds `r_th_factor × per-wire-RMS`, the ROI is discarded before entering refinement.
+   Every tight ROI from `ROI_formation` is tested. If no single tick exceeds `r_th_factor × per-wire-RMS`, the ROI is discarded before entering refinement. (Function starts at L270.)
 
-2. **`CheckROIs()` — inter-ROI connectivity pruning** (`ROI_refinement.cxx:1191`):
+2. **`CheckROIs()` — inter-ROI connectivity pruning** (`ROI_refinement.cxx:1193`):
    ```cpp
    th  = th_factor * rms_u.at(chid);
    th1 = th_factor * rms_u.at(chid1);
    if (!roi->overlap(roi1, th, th1)) { unlink(roi, roi1); }
    ```
-   ROIs on adjacent wires stay linked only if their overlap region reaches `r_th_factor × RMS` on both wires. Lower value → more weak induction signals survive connectivity pruning.
+   ROIs on adjacent wires stay linked only if their overlap region reaches `r_th_factor × RMS` on both wires. Lower value → more weak induction signals survive connectivity pruning. (Function starts at L1164.)
 
 ### `r_fake_signal_low_th` and `r_fake_signal_high_th`
 
 Absolute electron thresholds for fake-signal cleanup. Applied differently for collection vs. induction:
 
-**Collection (W) — `CleanUpCollectionROIs()`** (`ROI_refinement.cxx:1291`):
+**Collection (W) — `CleanUpCollectionROIs()`** (`ROI_refinement.cxx:1289`):
 ```
 mean_threshold = fake_signal_low_th    (500 e⁻)
 threshold      = fake_signal_high_th   (1000 e⁻)
 // ind_factor NOT applied
 ```
 
-**Induction (U/V) — `CleanUpInductionROIs()`** (`ROI_refinement.cxx:1373`):
+**Induction (U/V) — `CleanUpInductionROIs()`** (`ROI_refinement.cxx:1371`):
 ```
 mean_threshold = fake_signal_low_th  × fake_signal_low_th_ind_factor
 threshold      = fake_signal_high_th × fake_signal_high_th_ind_factor

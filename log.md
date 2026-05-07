@@ -181,3 +181,26 @@ Pages created:
 
 Pages updated:
 - `wiki/Imaging Deghosting.md` — rewritten with accurate 3-round InSliceDeghosting structure, source-level detail on ProjectionDeghosting 2-pass algorithm
+
+## [2026-05-07] verify | Source verification pass — 6 pages corrected
+
+Continued verification session from agent_log/2026-05-07-deghosting-and-verification.md.
+
+**PDHD Signal Processing Configuration:**
+- Resolved `r_fake_signal_*_ind_factor = 0.15` discrepancy: the 0.15 was in a local art/LArSoft processing config (not tracked in dunereco or toolkit). Git history confirms `ind_factor` was always 1.0 in tracked repos from first commit (`f3d16cfd`). Updated table header to "Xuyang's art/LArSoft config" and added explanation note.
+
+**ROI Refinement:** Corrected line numbers: `load_data()` L270 (code at L323), `CheckROIs()` L1164 (code at L1193), `CleanUpCollectionROIs()` L1289, `CleanUpInductionROIs()` L1371.
+
+**L1SP Filter:** Corrected line count: 692 → 720.
+
+**Steiner Graph:** Major rewrite — algorithm was wrong (wiki said "kd-tree + Kruskal MST", actual is Voronoi tessellation + inter-terminal path expansion). `create_enhanced_steiner_graph()` (SteinerGrapher.cxx:898) uses Dijkstra-based Voronoi, not Kruskal. Kruskal only exists in `recover_steiner_graph` (prototype, NOT ported). Stored graph name corrected: "steiner" → "steiner_graph".
+
+**Track Fitting and Calorimetry:** Corrected Parameters struct: fields are `DL`/`DT` (not `diffusion_L`/`diffusion_T`), defaults are 6.4/9.8 cm²/s (not 4.0/8.8). Added missing fields (sigma_w_T, charge uncertainties). Noted PDVD simparams values are for noise simulation, not TrackFitting defaults.
+
+**Verified (no changes needed):**
+- PDVD DL=4.0, DT=8.8 cm²/s in `protodunevd/simparams.jsonnet` ✓
+- PDHD `intraces: ''` (wildcard), `outtraces: 'raw%d' % n` (toolkit nf.jsonnet:96-97) ✓
+- PDVD `intraces: 'orig'`, `outtraces: 'raw%d'` (protodunevd nf.jsonnet:91-92) ✓
+- ShieldCouplingSub "only apply to top" — protodunevd nf.jsonnet:59-62 ✓
+- PDVD diffusion DL=4.0, DT=8.8 in simparams.jsonnet ✓
+- L1SP Filter, ROI Refinement, Pattern Recognition PR Loop logic descriptions — correct ✓

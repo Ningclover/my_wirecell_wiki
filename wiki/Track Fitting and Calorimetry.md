@@ -1,26 +1,39 @@
 ---
 tags: [algorithm, component]
 sources: 1
-updated: 2026-04-16
+updated: 2026-05-07
 ---
 
 # Track Fitting and Calorimetry
 
 `TrackFitting` is a utility class (not a WireCell component — it has no `configure()` or `execute()` interface). It is instantiated by algorithms inside the clus pipeline to perform local track fitting and calorimetric energy measurement.
 
-## Parameters struct
+## Parameters struct (actual, from `TrackFitting.h:35`)
+
+Key fields (defaults shown):
 
 ```cpp
 struct TrackFitting::Parameters {
-    double diffusion_L;    // longitudinal diffusion coefficient (cm²/µs)
-    double diffusion_T;    // transverse diffusion coefficient (cm²/µs)
-    double sigma_x;        // position uncertainty in drift direction (cm)
-    double sigma_yz;       // position uncertainty in wire-plane directions (cm)
-    double charge_sigma;   // per-blob charge uncertainty (electrons)
+    double DL = 6.4 * cm²/s;    // Longitudinal diffusion (MicroBooNE default)
+    double DT = 9.8 * cm²/s;    // Transverse diffusion (MicroBooNE default)
+
+    // Wire-plane spatial resolution (software filter broadening)
+    double col_sigma_w_T = 0.188060 * 3mm * 0.2;  // collection
+    double ind_sigma_u_T = 0.402993 * 3mm * 0.3;  // U induction
+    double ind_sigma_v_T = 0.402993 * 3mm * 0.5;  // V induction
+
+    // Relative/absolute charge uncertainties
+    double rel_uncer_ind = 0.075;
+    double rel_uncer_col = 0.05;
+    double add_uncer_col = 300.0; // electrons
+    double rel_charge_uncer = 0.1;
+    double add_charge_uncer = 600; // electrons
+    double default_charge_th = 100;
+    double default_charge_err = 1000;
 };
 ```
 
-These match the detector simulation parameters (e.g., for PDVD: DL=4.0 cm²/s, DT=8.8 cm²/s from `simparams.jsonnet`).
+Note: PDVD simulation uses DL=4.0 cm²/s, DT=8.8 cm²/s (`protodunevd/simparams.jsonnet`), but `TrackFitting` defaults are hardcoded to 6.4/9.8. Detector-specific presets are provided via `TrackFittingPresets`.
 
 ## Wire → space projection
 

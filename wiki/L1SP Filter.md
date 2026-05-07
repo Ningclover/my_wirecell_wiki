@@ -1,14 +1,14 @@
 ---
 tags: [algorithm, component]
 sources: 1
-updated: 2026-04-14
+updated: 2026-05-07
 ---
 
 # L1SP Filter
 
 L1-norm regularized sparse signal deconvolution for **shorted wire regions** where induction and collection plane wires are electrically connected. Standard deconvolution fails in these regions; L1SP jointly decomposes the mixed signal.
 
-**File:** `src/L1SPFilter.cxx` (692 lines)  
+**File:** `src/L1SPFilter.cxx` (720 lines)  
 **Header:** `inc/WireCellSigProc/L1SPFilter.h`
 
 ## Purpose
