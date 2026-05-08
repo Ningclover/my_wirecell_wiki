@@ -204,3 +204,16 @@ Continued verification session from agent_log/2026-05-07-deghosting-and-verifica
 - ShieldCouplingSub "only apply to top" — protodunevd nf.jsonnet:59-62 ✓
 - PDVD diffusion DL=4.0, DT=8.8 in simparams.jsonnet ✓
 - L1SP Filter, ROI Refinement, Pattern Recognition PR Loop logic descriptions — correct ✓
+
+## [2026-05-07] ingest | pochoir source code — FDM solver, LAr physics, drift integration
+
+Deep source code investigation of `/nfs/data/1/xning/field_response/pochoir/` (~15 source files). All major Python modules read.
+
+Pages created:
+- source-pochoir-source.md
+- Pochoir FDM Solver.md — Jacobi stencil, 5 engines, cumba CUDA kernel (8×8×16 blocks), edge conditions
+- Pochoir LAr Physics.md — BNL polynomial (a0..a5), DL/DT Einstein relations, longitudinal correction term
+- Pochoir Drift Integration.md — solve_ivp Radau rtol=atol=1e-10, RGI trilinear, SDE Euler-Maruyama, induce-30deg ±1.45mm, convertfr 1325-sample/sign-flip
+
+Pages updated:
+- PDVD Field Response Computation.md — added source-level implementation notes section with bc_interp z_idx=1100, extendwf cut_z/onestrip, FDM stencil formula, mobility coefficients, sign flip convention

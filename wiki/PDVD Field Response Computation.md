@@ -1,7 +1,7 @@
 ---
 tags: [algorithm, concept, experiment]
 sources: 1
-updated: 2026-05-03
+updated: 2026-05-07
 ---
 
 # PDVD Field Response Computation
@@ -197,6 +197,41 @@ domain/drift3d ──► gen ──► fdm ────────────�
 - `convertfr` truncates FR waveforms to **1325 samples** (132.5 µs at 100 ns period).
 - The output FR file is the input to `ctoffset` tuning in `sp.jsonnet` — the `ctoffset = 4 µs` is set to match this FR.
 
+## Source-level implementation notes
+
+These details were verified against the Python source in `pochoir/`. See dedicated pages for full algorithm descriptions.
+
+### FDM solver (`fdm_cumba.py`, `fdm_numpy.py`)
+
+The Jacobi stencil: `φ(i,j,k) = (1/2N) × Σ_{±1 neighbors} φ`. Converges when `max|Δφ| < precision`. The `cumba` engine runs a CUDA kernel with 8×8×16 thread blocks; convergence is sampled every 100 iterations (vs every 1 in the numpy engine). See [[Pochoir FDM Solver]].
+
+### LAr mobility (`lar.py`)
+
+BNL polynomial: 6 coefficients `a0..a5 = {551.6, 7158.3, 4440.43, 4.29, 43.63, 0.2053}`. Longitudinal diffusion adds an `E × dµ/dE` correction beyond the basic Einstein relation. All functions are NumPy-vectorized. See [[Pochoir LAr Physics]].
+
+### `bc-interp` hardcoded constants
+
+`bc_interp.py` stitches the 2D potential into the 3D domain X-faces at `x = center ± xcoord`. Far-field Z end BC: hardcoded `z_idx = 1100` grid points from the cathode end. Points at `z ≥ 1100` in the 2D solution are used as the 3D boundary at the Z face.
+
+### `extendwf` strip layout
+
+`onestrip = domain3d.shape[0] / 7`. Three X-regions:
+- `i < 7 × onestrip` (central 7-strip block): 2D solution for all Y
+- `7 × onestrip ≤ i < 14 × onestrip`: 3D solution for `z < cut_z=1100`, 2D for `z ≥ 1100`
+- `i ≥ 14 × onestrip`: 2D solution for all Y
+
+### Drift integration (`drift_numpy.py`)
+
+`scipy.integrate.solve_ivp` with `method='Radau'`, `rtol=atol=1e-10`. Velocity interpolated via `RegularGridInterpolator` (trilinear). See [[Pochoir Drift Integration]].
+
+### `induce-30deg` alternation
+
+30° strip unit cell: `dx = 7.615 mm` between strips. Even strips use Y offset −1.45 mm (paths 0..29); odd strips use Y offset +1.45 mm (paths 30..59). See [[Pochoir Drift Integration]].
+
+### `convertfr` output
+
+Truncates to 1325 samples (= 132.5 µs at 100 ns period). Sign flip: stored = `−1 × computed` (Ramo-theorem sign convention). See [[Pochoir Drift Integration]].
+
 ## Source Files
 
 | File | Role |
@@ -219,8 +254,9 @@ domain/drift3d ──► gen ──► fdm ────────────�
 
 ## See also
 
-[[PDVD Detector Parameters]], [[PDVD Signal Processing Configuration]], [[ADC to Electrons Signal Chain]]
+[[PDVD Detector Parameters]], [[PDVD Signal Processing Configuration]], [[ADC to Electrons Signal Chain]], [[Pochoir FDM Solver]], [[Pochoir LAr Physics]], [[Pochoir Drift Integration]]
 
 ## Sources
 
 - [[source-session-2026-05-03-pdvd-field-response]]
+- [[source-pochoir-source]]

@@ -24,6 +24,7 @@ Raw source ingest records (`type: file`) and session records (`type: conversatio
 - [[source-session-2026-05-03-pdvd-field-response]] — Full PDVD field response computation pipeline using `pochoir`: 10-stage 3D electrostatics + drift simulation producing `FR_xn_new.json.bz2`.
 - [[source-img-examination]] — Systematic code examination of `img/` (~38 source files): pipeline overview, slicing/tiling, charge solving, deghosting, 18 bugs (13 fixed), 15 efficiency issues (7 fixed).
 - [[source-session-2026-05-07-deghosting]] — Source-level investigation of all 5 deghosting components across img/ and clus/: multi-round InSliceDeghosting, ProjectionDeghosting, ClusteringDeghost, deghost_clusters, deghost_segments.
+- [[source-pochoir-source]] — Deep source code investigation of the `pochoir` Python package: FDM Jacobi solver, cumba CUDA engine, LAr mobility polynomial, drift ODE integration, induce-30deg geometry, convertfr schema.
 
 ---
 
@@ -68,7 +69,7 @@ Pattern recognition module: 3D blob cloud → particle trajectories + neutrino v
 
 #### Pattern Recognition
 
-- [[Steiner Graph]] — Retiling + k-d neighbor search + Kruskal MST skeleton; degree semantics
+- [[Steiner Graph]] — Retiling + Voronoi tessellation (multi-source Dijkstra) + inter-terminal path expansion; degree semantics
 - [[Pattern Recognition PR Loop]] — find_proto_vertex() 9-step loop, vertex scoring, SCN DL variant
 - [[Track Shower Separation]] — Topology (RMS spread) + trajectory (KS-test) classification, shower grouping, kinematics
 - [[Neutrino Vertex Determination]] — Per-cluster scoring, global multi-cluster selection, SCN DL override (2 cm cut)
@@ -108,7 +109,10 @@ Configuration files define how the algorithms above are wired and tuned for a sp
 - [[PDVD DNN ROI]] — DNN-based ROI finding: DNNROIFinding for U+V, W shunt, TorchService/TritonService
 - [[PDVD Imaging Configuration]] — 3D imaging: pre-proc, slicing (tick_span=4), tiling (GridTiling), charge solving
 - [[PDVD Clustering Configuration]] — Per-APA `MultiAlgBlobClustering` pipeline order (Pointed → LiveDead → Extend → Regular×2)
-- [[PDVD Field Response Computation]] — 10-stage `pochoir` pipeline: domain → gen → FDM → bc-interp → extendwf → drift → induce → convertfr; produces `FR_xn_new.json.bz2`
+- [[PDVD Field Response Computation]] — 10-stage `pochoir` pipeline: domain → gen → FDM → bc-interp → extendwf → drift → induce → convertfr; produces `FR_xn_new.json.bz2`; with source-level implementation notes
+- [[Pochoir FDM Solver]] — Jacobi stencil (1/2N × Σ neighbors), 5 engine backends, cumba CUDA 8×8×16 blocks, edge condition modes (fix/periodic/mirror)
+- [[Pochoir LAr Physics]] — BNL mobility polynomial (6 coefficients), DL/DT Einstein relations with longitudinal correction term, velocity field computation
+- [[Pochoir Drift Integration]] — scipy.solve_ivp Radau (rtol=atol=1e-10), RGI trilinear interpolation, SDE Euler-Maruyama, induce-30deg ±1.45 mm strip alternation, convertfr 1325-sample truncation
 
 ### ProtoDUNE-HD (pdhd)
 
